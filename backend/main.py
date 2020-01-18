@@ -1,8 +1,9 @@
 import json
+import sys
 from trip_planner import find_carbon_paths
 
-def main(input_json):
-    input_data = input_json.json()
+def main(*args):
+    input_data = args[1].json()
     start_city = input_data["start"]
     end_city = input_data["end"]
 
@@ -19,6 +20,7 @@ def main(input_json):
     print(return_list)
     return json.dumps(return_list)
 
+main(sys.argv)
 """
 trip: {
     steps: [
