@@ -1,10 +1,14 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const carbon = require("./routes/api/getCarbon");
 
 const app = express();
+app.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use routes
 app.use("/api/carbon", carbon);
