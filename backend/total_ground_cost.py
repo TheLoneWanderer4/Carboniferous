@@ -85,10 +85,9 @@ def get_distance_and_time_by_car(city_a, city_b):
         '&destinations=' + city_b + \
         '&key=' + API_KEY).json()
     try:
-        print(response)
         num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3]
         time_secs = int(response['rows'][0]['elements'][0]['duration']['value'])
-        return (int(num_miles), (time_secs / 3600) )
+        return (int(float(num_miles)), (time_secs / 3600) )
     except KeyError:
         return (-1, -1)
 
@@ -112,10 +111,9 @@ def get_distance_and_time_by_bus(city_a, city_b):
         '&destinations=' + city_b + \
         '&key=' + API_KEY).json()
     try:
-        print(response)
         num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3]
         time_secs = int(response['rows'][0]['elements'][0]['duration']['value'])
-        return (int(num_miles), (time_secs / 3600) )
+        return (int(float(num_miles)), (time_secs / 3600) )
     except KeyError:
         return (-1, -1)
 
@@ -139,9 +137,8 @@ def get_distance_and_time_by_train(city_a, city_b):
         '&destinations=' + city_b + \
         '&key=' + API_KEY).json()
     try:
-        print(response)
         num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3]
         time_secs = int(response['rows'][0]['elements'][0]['duration']['value'])
-        return (int(num_miles), (time_secs / 3600) )
+        return (int(float(num_miles)), (time_secs / 3600) )
     except KeyError:
         return (-1, -1)
