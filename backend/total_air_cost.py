@@ -1,16 +1,25 @@
 import requests
 
+# api locations
+FLIGHT_DATA_API = "http://localhost:3030/flights"
+CARBON_FOOTPRINT_API = "https://api.triptocarbon.xyz/v1/footprint"
+
+# strings that are likely to be adjusted as parameters
+FLIGHT_TYPE = "economyFlight"
+COUNTRY = "usa"
+COST = "cost"
+
 
 def total_air_cost(src, dest, date):
-    flights = (requests.get("http://localhost:3030/flights",
+    flights = (requests.get(FLIGHT_DATA_API,
                             params={"date": date, "origin": src, "destination": dest})).json()
 
     if len(flights) == 0:
         return [-1, -1, -1]
 
-    footprint = float(requests.get("https://api.triptocarbon.xyz/v1/footprint",
+    footprint = float(requests.get(CARBON_FOOTPRINT_API,
                               params={"activity": flights[0].get("distance"), "activityType": "miles",
-                                      "mode": "economyFlight", "country": "usa"}).json().get("carbonFootprint"))
+                                      "mode": FLIGHT_TYPE, "country": COUNTRY}).json().get("carbonFootprint"))
 
     info = [footprint, get_time_from_flight(flights[0]), get_min_cost(flights)]
     return info
@@ -21,10 +30,10 @@ def get_time_from_flight(flight):
 
 
 def get_min_cost(flights):
-    min_cost = flights[0].get("cost")
+    min_cost = flights[0].get(COST)
     for flight in flights:
-        if flight.get("cost") < min_cost:
-            min_cost = flight.get("cost")
+        if flight.get(COST) < min_cost:
+            min_cost = flight.get(COST)
     return min_cost
 
 
