@@ -19,6 +19,10 @@ class Trip:
             curr += (city.current_city + '(' + city.transport_mode + ')' + '->')
         return curr + 'ENDTRIP\n'
 
+    def get_last_city(self):
+        last_step = self.cities[-1]
+        return last_step.current_city
+
 class TripStep:
     # Modes of transportation allowed
     PLANE = "plane"
@@ -36,7 +40,7 @@ class TripStep:
     def __init__(self, city, mode, carbon, money, time):
         self.current_city = city
         if mode == None:
-            self.transport_mode = ""
+            self.transport_mode = "none"
         else:
             self.transport_mode = mode
         self.carbon_cost = carbon

@@ -44,25 +44,34 @@ def total_ground_cost(city_a, city_b, mpg):
     # Car Costs
     miles_by_car, hours_by_car = get_distance_and_time_by_car(city_a, city_b)
     gallons_used = miles_by_car // mpg
-    response = requests.get(CARBON_BASE_URL + str(gallons_used) + '&activityType=fuel' + CARBON_CAR_URL_EXT)
-    list_of_costs.append( (response.json()['carbonFootprint'], \
-            gallons_used * PETROL_PRICE_PER_GAL_USD, \
-            hours_by_car) )
+    if(gallons_used == 0):
+        list_of_costs.append((0, 0, 0)) # negligible cost
+    else:
+        response = requests.get(CARBON_BASE_URL + str(gallons_used) + '&activityType=fuel' + CARBON_CAR_URL_EXT)
+        list_of_costs.append( (response.json()['carbonFootprint'], \
+                gallons_used * PETROL_PRICE_PER_GAL_USD, \
+                hours_by_car) )
 
     # Bus Costs
     miles_by_bus, hours_by_bus = get_distance_and_time_by_bus(city_a, city_b)
-    response = requests.get(CARBON_BASE_URL + str(miles_by_bus) + '&activityType=miles' + CARBON_BUS_URL_EXT)
-    list_of_costs.append( (response.json()['carbonFootprint'], \
-            miles_by_bus * BUS_PRICE_PER_MILE_USD, \
-            hours_by_bus) )
+    if (miles_by_bus == 0):
+        list_of_costs.append((0, 0, 0))  # negligible cost
+    else:
+        response = requests.get(CARBON_BASE_URL + str(miles_by_bus) + '&activityType=miles' + CARBON_BUS_URL_EXT)
+        list_of_costs.append( (response.json()['carbonFootprint'], \
+                miles_by_bus * BUS_PRICE_PER_MILE_USD, \
+                hours_by_bus) )
 
     # Train Costs
     miles_by_train, hours_by_train = get_distance_and_time_by_train(city_a, city_b)
-    response = requests.get(CARBON_BASE_URL + str(miles_by_train) + '&activityType=miles' + CARBON_TRAIN_URL_EXT)
-    list_of_costs.append( (response.json()['carbonFootprint'], \
-            miles_by_train * TRAIN_PRICE_PER_MILE_USD, \
-            hours_by_train) )
-    
+    if(miles_by_train == 0):
+        list_of_costs.append((0, 0, 0))  # negligible cost
+    else:
+        response = requests.get(CARBON_BASE_URL + str(miles_by_train) + '&activityType=miles' + CARBON_TRAIN_URL_EXT)
+        list_of_costs.append( (response.json()['carbonFootprint'], \
+                miles_by_train * TRAIN_PRICE_PER_MILE_USD, \
+                hours_by_train) )
+
     return list_of_costs
 
 
