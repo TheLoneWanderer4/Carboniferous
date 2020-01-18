@@ -17,9 +17,9 @@ var exampleBody = {
   }
 };
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
   console.log(req.body);
-  res.json({ good: true });
+  res.json({ paths: [1, 2, 4] });
 });
 
 module.exports = router;
