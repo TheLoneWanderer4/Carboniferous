@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Customers from './components/customers';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Express Starter</h1>
-        </header>
-        <Customers />
+import { Provider } from "react-redux";
+import store from "./store";
+
+import AppControls from "./components/Controls.js";
+import TripForm from "./components/TripForm.js";
+import LandingScreen from "./components/LandingScreen.js";
+
+function App() {
+  return (
+    <Provider store={store} className="h-100">
+      <div className="App h-100">
+        <AppControls />
+        <LandingScreen />
+        <TripForm />
       </div>
-    );
-  }
+    </Provider>
+  );
 }
 
 export default App;
