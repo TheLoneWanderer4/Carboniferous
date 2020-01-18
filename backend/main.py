@@ -11,10 +11,13 @@ def main(input_json):
     return_dict = {}
     final_list = find_carbon_paths(start_city,end_city)
     for i in range(5):
+        print(len(final_list))
+        if(len(final_list) <= i):
+            break
         return_dict[i] = final_list[i].make_dict()
 
+    print(return_dict)
     return json.dumps(return_dict)
-
 
 """
 trip: {

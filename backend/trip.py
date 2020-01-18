@@ -1,5 +1,9 @@
 class Trip:
-
+    # Modes of transportation allowed
+    PLANE = "plane"
+    CAR = "car"
+    BUS = "bus"
+    TRAIN = "train"
     """
     total_costs is the triple tuple of costs (carbon, money, time)
     cities is a list of TripSteps
@@ -41,12 +45,6 @@ class Trip:
         return dict
 
 class TripStep:
-    # Modes of transportation allowed
-    PLANE = "plane"
-    CAR = "car"
-    BUS = "bus"
-    TRAIN = "train"
-
     # Fields for a TripStep
     current_city = ""
     transport_mode = ""
