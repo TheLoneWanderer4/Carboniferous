@@ -7,12 +7,27 @@ from copy import deepcopy
 
 def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_time, key_vault):
     trips = start_ground_trips(source, destination, car_mpg, key_vault)
-    print(trips[0], " last city: ", trips[0].get_last_city())
-    find_flights(trips, destination, max_cost, max_time, depart_time, key_vault)
+    updated_trips = find_flights(trips, destination, max_cost, max_time, depart_time, key_vault)
+    finished_trips = finish_trips(updated_trips, destination, max_cost, max_time, car_mpg, key_vault)
+    return sort_by_carbon(finished_trips)
 
 """
 
 """
+
+def sort_by_carbon(finished_trips):
+    carbon_dictionary = {}
+    for trip in finished_trips:
+        carbon_dictionary[trip.carbon_cost] = trip
+
+    top_five_carbons = list(carbon_dictionary.keys())
+    top_five_carbons.sort()
+    top_five_trips = []
+    for val in top_five_carbons[:5]:
+        top_five_trips.append(carbon_dictionary[val])
+    return top_five_trips
+
+
 def start_ground_trips(source, destination, car_mpg, key_vault):
     src_airports = nearby_airports(source, key_vault)
     trips = []
@@ -53,7 +68,6 @@ def start_ground_trips(source, destination, car_mpg, key_vault):
     
 def find_flights(curr_trips, destination, max_cost, max_time, depart_time, key_vault):
     end_cities = nearby_airports(destination, key_vault)
-    print(curr_trips)
     updated_trips = []
     for trip in curr_trips:
         if trip.money_cost >= max_cost or trip.time_cost >= max_time:
@@ -112,6 +126,8 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, key_vault
         if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time:
             finished_trips.append(train_trip)
     print(finished_trips)
+
+    return finished_trips
     
 
 from api_management import APIKeys

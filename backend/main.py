@@ -15,10 +15,7 @@ def main(*args):
     return_list = []
     final_list = find_carbon_paths(start_city,end_city,car_mpg,max_cost,\
         max_time,depart_date, key_vault)
-    for i in range(5):
-        print(len(final_list))
-        if(len(final_list) <= i):
-            break
+    for i in range(len(final_list)):
         return_list.append(final_list[i].make_dict())
 
     print(return_list)
