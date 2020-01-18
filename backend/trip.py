@@ -41,15 +41,15 @@ class Trip:
         return dict
 
 class TripStep:
-# Modes of transportation allowed
-PLANE = "plane"
-CAR = "car"
-BUS = "bus"
-TRAIN = "train"
+    # Modes of transportation allowed
+    PLANE = "plane"
+    CAR = "car"
+    BUS = "bus"
+    TRAIN = "train"
 
-# Fields for a TripStep
-current_city = ""
-transport_mode = ""
-carbon_cost = 0.0
-dollar_cost = 0.0
-time_cost = 0.0
+    # Fields for a TripStep
+    current_city = ""
+    transport_mode = ""
+    carbon_cost = 0.0
+    dollar_cost = 0.0
+    time_cost = 0.0
