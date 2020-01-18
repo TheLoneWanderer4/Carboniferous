@@ -48,8 +48,6 @@ def total_ground_cost(city_a, city_b, mpg):
         list_of_costs.append((0, 0, 0)) # negligible cost
     else:
         response = requests.get(CARBON_BASE_URL + str(gallons_used) + '&activityType=fuel' + CARBON_CAR_URL_EXT)
-        print(gallons_used)
-        print(response.json())
         list_of_costs.append( (response.json()['carbonFootprint'], \
                 gallons_used * PETROL_PRICE_PER_GAL_USD, \
                 hours_by_car) )
