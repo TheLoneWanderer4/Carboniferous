@@ -3,8 +3,8 @@ import requests
 import googlemaps
 import pprint
 '''
-This function takes in a city name, as a string, and returns the names of the five 
-nearest airports
+This function takes in a city name, as a string, and returns a list of tuples,
+with each tuple having the name of the airport and its IATA airport code
 '''
 def nearby_airports(city):
     # Key tokens for api
@@ -34,10 +34,9 @@ def nearby_airports(city):
         + str(city_lat)+ ","+str(city_lng)+ "?lang=en",headers=headers)).json()
     final_list = []
     for i in airports_json["NearestAirportResource"]["Airports"]["Airport"]:
-        final_list.append(i["Names"]["Name"]["$"])
+        final_list.append((i["Names"]["Name"]["$"],i["AirportCode"]))
     return final_list
 
-
-
+print(nearby_airports("Tucson"))
     
 
