@@ -21,7 +21,9 @@ CARBON_TRAIN_URL_EXT = '&mode=transitRail'
 PETROL_PRICE_PER_GAL_USD = 2.83
 BUS_PRICE_PER_MILE_USD = 0.10
 TRAIN_PRICE_PER_MILE_USD = 0.50
-
+KG_C_PER_GAL_CAR = 8.78
+KG_C_PER_MILE_BUS = 0.107
+KG_C_PER_MILE_TRAIN = 0.16
 
 
 """
@@ -49,22 +51,18 @@ def total_ground_cost(city_a, city_b, mpg, key_vault):
     if(gallons_used == 0):
         list_of_costs.append((0, 0, 0)) # negligible cost
     else:
-        response = requests.get(CARBON_BASE_URL + str(gallons_used) + \
-            '&activityType=fuel' + CARBON_CAR_URL_EXT + '&appTkn=' + key_vault.trip_to_carbon_key())
-        list_of_costs.append( (response.json()['carbonFootprint'], \
+        list_of_costs.append((gallons_used * KG_C_PER_GAL_CAR, \
                 gallons_used * PETROL_PRICE_PER_GAL_USD, \
-                hours_by_car) )
+                hours_by_car))
 
     # Bus Costs
     miles_by_bus, hours_by_bus = get_distance_and_time_by_bus(city_a, city_b, key_vault)
     if (miles_by_bus == 0):
         list_of_costs.append((0, 0, 0))  # negligible cost
     else:
-        response = requests.get(CARBON_BASE_URL + str(miles_by_bus) + \
-            '&activityType=miles' + CARBON_BUS_URL_EXT + '&appTkn=' + key_vault.trip_to_carbon_key())
-        list_of_costs.append( (response.json()['carbonFootprint'], \
+        list_of_costs.append( (miles_by_bus * KG_C_PER_MILE_BUS, \
                 miles_by_bus * BUS_PRICE_PER_MILE_USD, \
-                hours_by_bus) )
+                hours_by_bus))
 
     # Train Costs
     miles_by_train, hours_by_train = get_distance_and_time_by_train(city_a, city_b, key_vault)
@@ -73,9 +71,9 @@ def total_ground_cost(city_a, city_b, mpg, key_vault):
     else:
         response = requests.get(CARBON_BASE_URL + str(miles_by_train) + \
             '&activityType=miles' + CARBON_TRAIN_URL_EXT + '&appTkn=' + key_vault.trip_to_carbon_key())
-        list_of_costs.append( (response.json()['carbonFootprint'], \
+        list_of_costs.append((miles_by_train * KG_C_PER_MILE_TRAIN, \
                 miles_by_train * TRAIN_PRICE_PER_MILE_USD, \
-                hours_by_train) )
+                hours_by_train))
 
     return list_of_costs
 

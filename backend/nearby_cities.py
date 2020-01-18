@@ -37,6 +37,5 @@ def nearby_airports(city, key_vault):
         final_list.append((i["Names"]["Name"]["$"],i["AirportCode"]))
     return final_list
 
-print(nearby_airports("Tucson"))
     
 
