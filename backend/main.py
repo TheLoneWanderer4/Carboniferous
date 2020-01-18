@@ -1,6 +1,7 @@
 import json
 import sys
 from trip_planner import find_carbon_paths
+from map_link import map_link
 from api_management import APIKeys
 
 def main(*args):
@@ -20,8 +21,16 @@ def main(*args):
         if(len(final_list) <= i):
             break
         return_list.append(final_list[i].make_dict())
-
-    print(return_list)
+        # TODO: Actually check if this works!!!
+        previous_step = return_list[0]["trip"]["step"]
+        previous_step["current_city"] =""
+        for k in range(1,len(return_list[i]["trip"]["step"])):
+            curr_step = return_list["trip"]["step"][i]
+            curr_step["link"] = map_link(previous_step["current_city"],\
+                curr_step["current_city"],curr_step[transport])
+            previous_step = curr_step
+    
+    print(return_list) 
     return json.dumps(return_list)
 
 main(sys.argv)
@@ -49,6 +58,7 @@ trip: {
             carbon_cost:
             dollar_cost:
             time_cost:
+            link: 
         }
     ]
     total_carbon:
