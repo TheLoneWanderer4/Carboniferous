@@ -8,7 +8,6 @@ def main(*args):
         input_data["start"],input_data["end"],input_data["mode"]["car"]["mpg"] 
     max_cost,max_time,depart_date = \
         input_data["maxPrice"],input_data["maxTime"],input_data["date"]
-    # TODO: add car_mpg, max_cost, max_time, depart_date
     # find_carbon_paths will return a list of path objects to return as a json
     # files to the front end.
     return_list = []
