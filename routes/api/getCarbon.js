@@ -14,11 +14,24 @@ router.post("/", (req, res) => {
     args: [JSON.stringify(req.body)]
   };
 
-  PythonShell.run("backend/testTheThing.py", options, function(err, results) {
+  PythonShell.run("backend/main-fake.py", options, function(err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
-    console.log(JSON.parse(results[1]));
-    res.json(JSON.parse(results[1]));
+    res.json(results.map(result => JSON.parse(result)));
+  });
+});
+
+router.post("/map", (req, res) => {
+  let options = {
+    mode: "text",
+    pythonOptions: ["-u"], // get print results in real-time
+    args: [req.body.start, req.body.end, req.body.mode]
+  };
+
+  PythonShell.run("backend/map_link.py", options, function(err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    res.json({ link: results });
   });
 });
 
