@@ -1,8 +1,10 @@
 import json
 import sys
 from trip_planner import find_carbon_paths
+from api_management import APIKeys
 
 def main(*args):
+    key_vault = APIKeys()
     input_data = args[1].json()
     start_city,end_city,car_mpg, = \
         input_data["start"],input_data["end"],input_data["mode"]["car"]["mpg"] 
@@ -12,7 +14,7 @@ def main(*args):
     # files to the front end.
     return_list = []
     final_list = find_carbon_paths(start_city,end_city,car_mpg,max_cost,\
-        max_time,depart_date)
+        max_time,depart_date, key_vault)
     for i in range(5):
         print(len(final_list))
         if(len(final_list) <= i):
