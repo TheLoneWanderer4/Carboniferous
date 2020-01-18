@@ -1,43 +1,10 @@
-# React Express Starter Pack
+# Carboniferous
 
-> Create full stack apps with React and Express. Run your client and server with a single command. 
+A React app that calculates the most carbon efficient way to travel from city to city. The project was created as a part of the 2020 HackAZ hackathon.
 
-### Redux Version
-This version does not include Redux
-[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter) 
 
-## Quick Start
-
-``` bash
-# Install dependencies for server
-npm install
-
-# Install dependencies for client
-npm run client-install
-
-# Run the client & server with concurrently
-npm run dev
-
-# Run the Express server only
-npm run server
-
-# Run the React client only
-npm run client
-
-# Server runs on http://localhost:5000 and client on http://localhost:3000
-```
-
-## App Info
-
-### Author
-
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
-
-### Version
-
-1.0.0
-
-### License
-
-This project is licensed under the MIT License
+## Authors
+[Amanda Bertsch](https://github.com/abertsch72)
+[Mood Gladney](https://github.com/Themood)
+[Joseph Acevedo](https://github.com/Joseph-Acevedo)
+[Amin Sennour](https://github.com/TheLoneWanderer4)
