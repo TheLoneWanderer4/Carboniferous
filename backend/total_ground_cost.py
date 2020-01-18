@@ -44,32 +44,35 @@ def total_ground_cost(city_a, city_b, mpg, key_vault):
 
     list_of_costs = []
     # Car Costs
-    miles_by_car, hours_by_car = get_distance_and_time_by_car(city_a, city_b)
+    miles_by_car, hours_by_car = get_distance_and_time_by_car(city_a, city_b, key_vault)
     gallons_used = miles_by_car // mpg
     if(gallons_used == 0):
         list_of_costs.append((0, 0, 0)) # negligible cost
     else:
-        response = requests.get(CARBON_BASE_URL + str(gallons_used) + '&activityType=fuel' + CARBON_CAR_URL_EXT)
+        response = requests.get(CARBON_BASE_URL + str(gallons_used) + \
+            '&activityType=fuel' + CARBON_CAR_URL_EXT + '&appTkn=' + key_vault.trip_to_carbon_key())
         list_of_costs.append( (response.json()['carbonFootprint'], \
                 gallons_used * PETROL_PRICE_PER_GAL_USD, \
                 hours_by_car) )
 
     # Bus Costs
-    miles_by_bus, hours_by_bus = get_distance_and_time_by_bus(city_a, city_b)
+    miles_by_bus, hours_by_bus = get_distance_and_time_by_bus(city_a, city_b, key_vault)
     if (miles_by_bus == 0):
         list_of_costs.append((0, 0, 0))  # negligible cost
     else:
-        response = requests.get(CARBON_BASE_URL + str(miles_by_bus) + '&activityType=miles' + CARBON_BUS_URL_EXT)
+        response = requests.get(CARBON_BASE_URL + str(miles_by_bus) + \
+            '&activityType=miles' + CARBON_BUS_URL_EXT + '&appTkn=' + key_vault.trip_to_carbon_key())
         list_of_costs.append( (response.json()['carbonFootprint'], \
                 miles_by_bus * BUS_PRICE_PER_MILE_USD, \
                 hours_by_bus) )
 
     # Train Costs
-    miles_by_train, hours_by_train = get_distance_and_time_by_train(city_a, city_b)
+    miles_by_train, hours_by_train = get_distance_and_time_by_train(city_a, city_b, key_vault)
     if(miles_by_train == 0):
         list_of_costs.append((0, 0, 0))  # negligible cost
     else:
-        response = requests.get(CARBON_BASE_URL + str(miles_by_train) + '&activityType=miles' + CARBON_TRAIN_URL_EXT)
+        response = requests.get(CARBON_BASE_URL + str(miles_by_train) + \
+            '&activityType=miles' + CARBON_TRAIN_URL_EXT + '&appTkn=' + key_vault.trip_to_carbon_key())
         list_of_costs.append( (response.json()['carbonFootprint'], \
                 miles_by_train * TRAIN_PRICE_PER_MILE_USD, \
                 hours_by_train) )
@@ -89,14 +92,14 @@ Return:
 a tuple that gives the number of miles from city_a to city_b by driving a car
 and the time in number of hours to drive that distance
 """
-def get_distance_and_time_by_car(city_a, city_b):
+def get_distance_and_time_by_car(city_a, city_b, key_vault):
     response = requests.get(MAPS_BASE_URL + \
         '&mode=driving' + \
         '&origins=' + city_a + \
         '&destinations=' + city_b + \
         '&key=' + API_KEY).json()
     try:
-        num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3]
+        num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3].replace(',', '')
         time_secs = int(response['rows'][0]['elements'][0]['duration']['value'])
         return (int(float(num_miles)), (time_secs / 3600) )
     except KeyError:
@@ -115,14 +118,14 @@ Return:
 a tuple that gives the number of miles from city_a to city_b by taking a car
 and the time in number of hours to travel that distance
 """
-def get_distance_and_time_by_bus(city_a, city_b):
+def get_distance_and_time_by_bus(city_a, city_b, key_vault):
     response = requests.get(MAPS_BASE_URL + \
         '&mode=transit&transit_mode=' + 'bus' + \
         '&origins=' + city_a + \
         '&destinations=' + city_b + \
         '&key=' + API_KEY).json()
     try:
-        num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3]
+        num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3].replace(',', '')
         time_secs = int(response['rows'][0]['elements'][0]['duration']['value'])
         return (int(float(num_miles)), (time_secs / 3600) )
     except KeyError:
@@ -141,14 +144,14 @@ Return:
 a tuple that gives the number of miles from city_a to city_b by taking a train
 and the time in number of hours to travel that distance
 """
-def get_distance_and_time_by_train(city_a, city_b):
+def get_distance_and_time_by_train(city_a, city_b, key_vault):
     response = requests.get(MAPS_BASE_URL + \
         '&mode=transit&transit_mode=' + 'train' + \
         '&origins=' + city_a + \
         '&destinations=' + city_b + \
         '&key=' + API_KEY).json()
     try:
-        num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3]
+        num_miles = response['rows'][0]['elements'][0]['distance']['text'][:-3].replace(',', '')
         time_secs = int(response['rows'][0]['elements'][0]['duration']['value'])
         return (int(float(num_miles)), (time_secs / 3600) )
     except KeyError:

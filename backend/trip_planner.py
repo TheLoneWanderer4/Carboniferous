@@ -17,7 +17,7 @@ def start_ground_trips(source, destination, car_mpg, key_vault):
     src_airports = nearby_airports(source, key_vault)
     trips = []
     for airport, code in src_airports:
-        ground_paths = total_ground_cost(source, airport, car_mpg)
+        ground_paths = total_ground_cost(source, airport, car_mpg, key_vault)
 
         car_trip = Trip(source)
         car_costs = ground_paths[0]
@@ -73,14 +73,14 @@ def find_flights(curr_trips, destination, max_cost, max_time, depart_time, key_v
                     updated_trips.append(curr_trip)
     return updated_trips
 
-def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg):
+def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, key_vault):
     finished_trips = []
     for trip in curr_trips:
         prev_city = trip.get_last_city()
         if prev_city == destination:
             finished_trips.append(trip)
             continue
-        ground_paths = total_ground_cost(prev_city, destination, car_mpg)
+        ground_paths = total_ground_cost(prev_city, destination, car_mpg, key_vault)
         # By car
         car_costs = ground_paths[0]
         car_trip = deepcopy(trip)
