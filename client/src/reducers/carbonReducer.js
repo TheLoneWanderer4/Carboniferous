@@ -1,7 +1,8 @@
-import { REQUEST_CARBON, ITEMS_LOADING } from "../actions/types.js";
+import { REQUEST_CARBON, ITEMS_LOADING, GET_MAP } from "../actions/types.js";
 
 const initialState = {
   paths: [],
+  link: "",
   loading: false
 };
 
@@ -12,6 +13,9 @@ export default (state = initialState, action) => {
         ...state,
         paths: action.payload
       };
+
+    case GET_MAP:
+      return { ...state, link: action.payload };
 
     case ITEMS_LOADING:
       return {
