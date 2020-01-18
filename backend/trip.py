@@ -5,6 +5,7 @@ class Trip:
     cities is a list of TripSteps
     """
 
+
     def __init__(self, start):
         self.cities = []
         self.cities.append(TripStep(start, None, 0.0, 0.0, 0.0))
@@ -12,6 +13,7 @@ class Trip:
         self.carbon_cost = 0.0
         self.money_cost = 0.0
         self.time_cost = 0.0
+        self.prev_airport_code = ""
 
     def __repr__(self):
         curr = "{" + str(self.carbon_cost) + "," + str(self.money_cost) + "," + str(self.time_cost) + "} "

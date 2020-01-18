@@ -16,7 +16,7 @@ def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_t
 def start_ground_trips(source, destination, car_mpg):
     src_airports = nearby_airports(source)
     trips = []
-    for airport in src_airports:
+    for airport, code in src_airports:
         ground_paths = total_ground_cost(source, airport, car_mpg)
 
         car_trip = Trip(source)
@@ -25,6 +25,7 @@ def start_ground_trips(source, destination, car_mpg):
         car_trip.money_cost += car_costs[1]
         car_trip.time_cost += car_costs[2]
         car_trip.cities.append(TripStep(airport, TripStep.CAR, car_costs[0], car_costs[1], car_costs[2]))
+        car_trip.prev_airport_code = code
         if car_trip.carbon_cost >= 0:
             trips.append(car_trip)
         
@@ -34,6 +35,7 @@ def start_ground_trips(source, destination, car_mpg):
         bus_trip.money_cost += bus_costs[1]
         bus_trip.time_cost += bus_costs[2]
         bus_trip.cities.append(TripStep(airport, TripStep.BUS, bus_costs[0], bus_costs[1], bus_costs[2]))
+        bus_trip.prev_airport_code = code
         if bus_trip.carbon_cost >= 0:
             trips.append(bus_trip)
 
@@ -43,6 +45,7 @@ def start_ground_trips(source, destination, car_mpg):
         train_trip.money_cost += train_costs[1]
         train_trip.time_cost += train_costs[2]
         train_trip.cities.append(TripStep(airport, TripStep.TRAIN, train_costs[0], train_costs[1], train_costs[2]))
+        train_trip.prev_airport_code = code
         if train_trip.carbon_cost >= 0:
             trips.append(train_trip)
 
@@ -50,25 +53,28 @@ def start_ground_trips(source, destination, car_mpg):
     
 def find_flights(curr_trips, destination, max_cost, max_time, depart_time):
     end_cities = nearby_airports(destination)
-    print("End: ", end_cities)
+    print(curr_trips)
     updated_trips = []
     for trip in curr_trips:
         if trip.money_cost >= max_cost or trip.time_cost >= max_time:
             continue
-        prev_city = trip.get_last_city()
-        if prev_city != destination:
+        prev_code = trip.prev_airport_code
+        if trip.get_last_city() != destination:
             for city in end_cities:
-                flight_cost = total_air_cost(prev_city, city, depart_time)
-                print(prev_city, " -> ", city, ": ", flight_cost)
+                airport_code = city[1]
+                flight_cost = total_air_cost(prev_code, airport_code, depart_time)
                 if flight_cost[0] >= 0:
                     curr_trip = deepcopy(trip)
-                    flight_step = TripStep(city, TripStep.PLANE, flight_cost[0], flight_cost[1], flight_cost[2])
+                    flight_step = TripStep(city[1], TripStep.PLANE, flight_cost[0], flight_cost[1], flight_cost[2])
                     curr_trip.carbon_cost += flight_cost[0]
                     curr_trip.money_cost += flight_cost[1]
                     curr_trip.time_cost += flight_cost[2]
                     curr_trip.cities.append(flight_step)
                     updated_trips.append(curr_trip)
-    print(updated_trips)
+    return updated_trips
 
+def finish_trips(curr_trips, destination, max_cost, max_time):
+    for trip in curr_trips:
+        pass
 
 find_carbon_paths("Tucson", "Seattle", 35, 10000, 100, "2020-01-15")
