@@ -11,7 +11,8 @@ export default (state = initialState, action) => {
     case REQUEST_CARBON:
       return {
         ...state,
-        paths: action.payload
+        paths: action.payload,
+        loading: false
       };
 
     case GET_MAP:

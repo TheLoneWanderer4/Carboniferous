@@ -4,6 +4,7 @@ import { REQUEST_CARBON, ITEMS_LOADING, GET_MAP } from "./types.js";
 
 export const requestCarbon = state => dispatch => {
   // use the app based on the input, set payload to the list of objects
+  dispatch(setItemsLoading());
   console.log("Submit Successful");
   axios
     .post("/api/carbon", state)

@@ -8,6 +8,7 @@ import store from "./store";
 import AppControls from "./components/Controls.js";
 import TripForm from "./components/TripForm.js";
 import TripTable from "./components/TripTable.js";
+import Loading from "./components/Loading.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <AppControls />
         <TripForm />
         <TripTable />
+        <Loading />
       </div>
     </Provider>
   );
