@@ -5,16 +5,16 @@ from trip import Trip, TripStep
 from copy import deepcopy
 
 
-def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_time):
-    trips = start_ground_trips(source, destination, car_mpg)
+def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_time, key_vault):
+    trips = start_ground_trips(source, destination, car_mpg, key_vault)
     print(trips[0], " last city: ", trips[0].get_last_city())
-    find_flights(trips, destination, max_cost, max_time, depart_time)
+    find_flights(trips, destination, max_cost, max_time, depart_time, key_vault)
 
 """
 
 """
-def start_ground_trips(source, destination, car_mpg):
-    src_airports = nearby_airports(source)
+def start_ground_trips(source, destination, car_mpg, key_vault):
+    src_airports = nearby_airports(source, key_vault)
     trips = []
     for airport, code in src_airports:
         ground_paths = total_ground_cost(source, airport, car_mpg)
@@ -51,8 +51,8 @@ def start_ground_trips(source, destination, car_mpg):
 
     return trips
     
-def find_flights(curr_trips, destination, max_cost, max_time, depart_time):
-    end_cities = nearby_airports(destination)
+def find_flights(curr_trips, destination, max_cost, max_time, depart_time, key_vault):
+    end_cities = nearby_airports(destination, key_vault)
     print(curr_trips)
     updated_trips = []
     for trip in curr_trips:
@@ -77,4 +77,5 @@ def finish_trips(curr_trips, destination, max_cost, max_time):
     for trip in curr_trips:
         pass
 
-find_carbon_paths("Tucson", "Seattle", 35, 10000, 100, "2020-01-15")
+from api_management import APIKeys
+find_carbon_paths("Tucson", "Seattle", 35, 10000, 100, "2020-01-15", key_vault= APIKeys())

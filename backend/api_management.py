@@ -11,14 +11,11 @@ class APIKeys:
         self.lutf_main_key = keys["LuftMain"]
         self.lutf_private_key = keys["LuftPrivate"]
 
-    @staticmethod
-    def get_google_key(self):
+    def google_key(self):
         return self.google_key
 
-    @staticmethod
-    def get_lutf_main_key(self):
+    def lutf_main_key(self):
         return self.lutf_main_key
 
-    @staticmethod
-    def get_lutf_private_key(self):
+    def lutf_private_key(self):
         return self.lutf_private_key

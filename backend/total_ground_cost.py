@@ -8,6 +8,7 @@ import requests
 import googlemaps as maps
 from datetime import datetime as dt
 
+API_KEY = ""
 
 # Constants used for querying Google Maps and Trip to Carbon APIs
 MAPS_BASE_URL = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial'
@@ -15,9 +16,6 @@ CARBON_BASE_URL = 'https://api.triptocarbon.xyz/v1/footprint?country=usa&activit
 CARBON_CAR_URL_EXT = '&fuelType=motorGasoline&mode=petrolCar'
 CARBON_BUS_URL_EXT = '&fuelType=diesel&mode=bus'
 CARBON_TRAIN_URL_EXT = '&mode=transitRail'
-
-# Google Maps API Key. TODO: Move this
-API_KEY = 'AIzaSyCK4gZqTHsd4Fi7_enR4aaDuyFGwmi3Je4' 
 
 # Constants for calculating costs of travel
 PETROL_PRICE_PER_GAL_USD = 2.83
@@ -39,7 +37,11 @@ Return:
 a list of triples, one for each of the ground options: car, bus, and train in 
 that order. The triple is in the order (C, $, t)
 """
-def total_ground_cost(city_a, city_b, mpg):
+def total_ground_cost(city_a, city_b, mpg, key_vault):
+    # Google Maps API Key fetched from vault
+    global API_KEY
+    API_KEY = key_vault.google_key()
+
     list_of_costs = []
     # Car Costs
     miles_by_car, hours_by_car = get_distance_and_time_by_car(city_a, city_b)
