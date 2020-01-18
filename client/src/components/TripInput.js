@@ -12,6 +12,7 @@ function TripInput(props) {
           id={props.name}
           placeholder={props.placeholder}
           onChange={props.onChange}
+          min={props.min}
         />
       </FormGroup>
     </div>

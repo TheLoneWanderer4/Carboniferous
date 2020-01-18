@@ -6,11 +6,11 @@ import pprint
 This function takes in a city name, as a string, and returns a list of tuples,
 with each tuple having the name of the airport and its IATA airport code
 '''
-def nearby_airports(city):
+def nearby_airports(city, key_vault):
     # Key tokens for api
-    LUFT_MAIN_KEY = "5xwbffdd35p2kbkmbawv6wjr"
-    LUFT_PRIVATE_KEY = "Jez3gpttWg"
-    GKEY = "AIzaSyCK4gZqTHsd4Fi7_enR4aaDuyFGwmi3Je4"
+    LUFT_MAIN_KEY = key_vault.luft_main_key()
+    LUFT_PRIVATE_KEY = key_vault.luft_private_key()
+    GKEY = key_vault.google_key()
     # change this later
     gmaps = googlemaps.Client(key=GKEY)
 

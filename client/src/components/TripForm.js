@@ -25,10 +25,10 @@ class TripForm extends Component {
     maxPrice: "",
     maxTime: "",
     modes: {
-      car: { allowed: false, mpg: 0 },
-      bus: { allowed: false },
-      plane: { allowed: false },
-      train: { allowed: false }
+      car: { allowed: true, mpg: 0 },
+      bus: { allowed: true },
+      plane: { allowed: true },
+      train: { allowed: true }
     }
   };
 
@@ -67,6 +67,7 @@ class TripForm extends Component {
           name="mpg"
           id="mpg"
           type="number"
+          min="0"
           placeholder="Enter your car's MPG "
           onChange={this.mpgChange}
         />
@@ -114,6 +115,7 @@ class TripForm extends Component {
                 placeholder="People"
                 label="Party Size"
                 type="number"
+                min="0"
                 onChange={this.onChange}
               />
             </Col>
@@ -123,6 +125,7 @@ class TripForm extends Component {
                 placeholder="Dollars"
                 label="Max Cost"
                 type="number"
+                min="0"
                 onChange={this.onChange}
               />
             </Col>
@@ -132,6 +135,7 @@ class TripForm extends Component {
                 placeholder="Hours"
                 label="Max Travel Time"
                 type="number"
+                min="0"
                 onChange={this.onChange}
               />
             </Col>
@@ -142,6 +146,7 @@ class TripForm extends Component {
               <div>
                 <div className="d-flex flex-row">
                   <CustomInput
+                    checked={this.state.modes.car.allowed}
                     type="switch"
                     name="car"
                     id="methods"
@@ -152,6 +157,7 @@ class TripForm extends Component {
                 </div>
 
                 <CustomInput
+                  checked={this.state.modes.plane.allowed}
                   type="switch"
                   name="plane"
                   id="methods2"
@@ -159,6 +165,7 @@ class TripForm extends Component {
                   onChange={this.onChange}
                 />
                 <CustomInput
+                  checked={this.state.modes.bus.allowed}
                   type="switch"
                   name="bus"
                   id="methods3"
@@ -167,6 +174,7 @@ class TripForm extends Component {
                 />
 
                 <CustomInput
+                  checked={this.state.modes.train.allowed}
                   type="switch"
                   name="train"
                   id="methods4"
@@ -177,9 +185,7 @@ class TripForm extends Component {
             </FormGroup>
           </Row>
           <FormGroup>
-            <Button type="submit" visable="false">
-              Submit
-            </Button>
+            <Button type="submit">Submit</Button>
           </FormGroup>
         </Form>
       </Container>

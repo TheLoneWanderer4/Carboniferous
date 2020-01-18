@@ -1,0 +1,4 @@
+backend/api_keys.json
+backend/.idea/*
+__pycache__
+.idea
