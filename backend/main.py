@@ -71,6 +71,7 @@ trip: {
             carbon_cost:
             dollar_cost:
             time_cost:
+            link: 
         }
     ]
     total_carbon:

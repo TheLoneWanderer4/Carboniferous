@@ -7,15 +7,17 @@ import store from "./store";
 
 import AppControls from "./components/Controls.js";
 import TripForm from "./components/TripForm.js";
-import LandingScreen from "./components/LandingScreen.js";
+import TripTable from "./components/TripTable.js";
+import Loading from "./components/Loading.js";
 
 function App() {
   return (
     <Provider store={store} className="h-100">
       <div className="App h-100">
         <AppControls />
-        <LandingScreen />
         <TripForm />
+        <TripTable />
+        <Loading />
       </div>
     </Provider>
   );

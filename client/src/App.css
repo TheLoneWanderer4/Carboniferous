@@ -3,6 +3,17 @@
   background-color: black;
 }
 
+.loading {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.5;
+}
+
+.spinner {
+  opacity: 1;
+}
+
 .landing {
   height: 100vh;
 }
