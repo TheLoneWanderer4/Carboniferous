@@ -3,11 +3,19 @@
   background-color: black;
 }
 
+#root {
+  font-family: Amatic;
+}
+
 .loading {
   width: 100vw;
   height: 100vh;
   background: black;
   opacity: 0.5;
+}
+
+.list {
+  margin-bottom: 500px;
 }
 
 .spinner {
@@ -16,6 +24,14 @@
 
 .landing {
   height: 100vh;
+}
+
+.form {
+  margin-bottom: 5%;
+}
+
+.table {
+  margin-bottom: 5%;
 }
 
 .App {

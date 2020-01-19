@@ -77,7 +77,7 @@ class TripForm extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="form">
         <Form onSubmit={this.onSubmit} role="form">
           <Row form>
             <Col md={5}>

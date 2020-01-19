@@ -3,12 +3,12 @@
   "end": "Dallas",
   "Date": "2020-01-21",
   "partySize": "2",
-  "maxPrice": "1600",
+  "maxPrice": "16000",
   "maxTime": "7",
   "modes": {
     "car": {
       "allowed": true,
-      "mpg": "21"
+      "mpg": "12"
     },
     "bus": {
       "allowed": true

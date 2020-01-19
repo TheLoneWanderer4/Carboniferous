@@ -59,7 +59,7 @@ class TripTable extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="table">
         <Table hover responsive bordered>
           <thead>
             <tr>
