@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const fs = require("fs");
 let { PythonShell } = require("python-shell");
 
 // @route GET api/items
@@ -11,12 +11,23 @@ router.post("/", (req, res) => {
   let options = {
     mode: "text",
     pythonOptions: ["-u"], // get print results in real-time
-    args: [JSON.stringify(req.body)]
+    args: []
   };
+
+  fs.writeFile(
+    "/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/input.json",
+    JSON.stringify(req.body, null, 2),
+    err => {
+      if (err) throw error;
+      console.log("saved file");
+    }
+  );
 
   PythonShell.run("backend/main.py", options, function(err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
+
+    console.log("Got results");
 
     for (var i = 0; i < results.length; i++) {
       results[i] = JSON.parse(results[i].replace(/'/g, '"'));

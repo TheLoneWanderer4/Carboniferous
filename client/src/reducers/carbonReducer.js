@@ -9,7 +9,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_CARBON:
-      console.log(action.payload);
       return {
         ...state,
         paths: action.payload,

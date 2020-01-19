@@ -7,6 +7,7 @@ from map_link import map_links
 def main(args):
     key_vault = APIKeys()
     input_data = json.load(args)
+
     start_city,end_city,car_mpg, = \
         input_data["start"],input_data["end"],int(input_data["modes"]["car"]["mpg"])
     max_cost,max_time,depart_date = \
@@ -14,8 +15,10 @@ def main(args):
     # find_carbon_paths will return a list of path objects to return as a json
     # files to the front end.
     return_list = []
+
     final_list = find_carbon_paths(start_city,end_city,car_mpg,max_cost,\
         max_time,depart_date, key_vault)
+
     # Serializing data to send back across
     for i in range(5):
         if(len(final_list) <= i):
@@ -28,26 +31,29 @@ def main(args):
         # TODO: Actually check if this works!!!
     for x in return_list:
         print(json.dumps(x))
+
+    if(len(return_list) < 1):
+        print(json.dumps(backup_data))
+
     return json.dumps(return_list)
 
 # MUST CHANGE ABSOLUTE PATH BASED ON LOCATION
 input_json = open("/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/input.json")
 
-
-hold = """{
-"start": "Tucson",
-"end": "Seattle",
-"Date": "2020-01-19",
-"partySize": "22",
-"maxPrice": "500",
-"maxTime": "12",
-"modes":{
-"car": {"allowed": true, "mpg": "30"},
-"bus": {"allowed": true},
-"plane": {"allowed": true},
-"train": {"allowed": true}
+backup_data = {
+    "steps" : [{"current_city": "ERROR",
+                "transport":"ERROR",
+                "carbon_cost" : 'ERROR',
+                "dollar_cost" : "ERROR",
+                "time_cost" : "ERROR",
+                "link": "https://www.youtube.com/watch?v=oHg5SJYRHA0"}],
+    "total_carbon" : 404,
+    "total_dollars" : 404,
+    "total_time" : 404
 }
-}"""
+
+
+
 main(input_json)
 """
 INPUT JSON

@@ -1,14 +1,23 @@
 {
-  "start": "El Paso",
-  "end": "Tucson",
-  "Date": "2020-01-23",
+  "start": "los angeles",
+  "end": "dc",
+  "Date": "2020-01-26",
   "partySize": "2",
-  "maxPrice": "500",
-  "maxTime": "12",
+  "maxPrice": "1000",
+  "maxTime": "32",
   "modes": {
-    "car": { "allowed": true, "mpg": "30" },
-    "bus": { "allowed": true },
-    "plane": { "allowed": true },
-    "train": { "allowed": true }
+    "car": {
+      "allowed": true,
+      "mpg": "32"
+    },
+    "bus": {
+      "allowed": true
+    },
+    "plane": {
+      "allowed": true
+    },
+    "train": {
+      "allowed": true
+    }
   }
 }
