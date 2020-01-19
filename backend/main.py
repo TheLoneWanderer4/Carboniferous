@@ -8,7 +8,7 @@ def main(args):
     key_vault = APIKeys()
     input_data = json.loads(args)
     start_city,end_city,car_mpg, = \
-        input_data["start"],input_data["end"],int(input_data["modes"]["car"]["mpg"]) 
+        input_data["start"],input_data["end"],int(input_data["modes"]["car"]["mpg"])
     max_cost,max_time,depart_date = \
         int(input_data["maxPrice"]),int(input_data["maxTime"]),input_data["Date"]
     # find_carbon_paths will return a list of path objects to return as a json
@@ -28,7 +28,8 @@ def main(args):
         print(trip_dict)
         return_list.append(trip_dict)
         # TODO: Actually check if this works!!!
-    print(return_list)
+    for x in return_list:
+        print(json.dumps(x))
     return json.dumps(return_list)
 
 
@@ -71,11 +72,11 @@ trip: {
             carbon_cost:
             dollar_cost:
             time_cost:
-            link: 
+            link:
         }
     ]
     total_carbon:
     total_dollars:
-    total_time: 
+    total_time:
 }
 """

@@ -14,10 +14,17 @@ router.post("/", (req, res) => {
     args: [JSON.stringify(req.body)]
   };
 
-  PythonShell.run("backend/main-fake.py", options, function(err, results) {
+  PythonShell.run("backend/main.py", options, function(err, results) {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
-    res.json(results.map(result => JSON.parse(result)));
+
+    console.log(results.length);
+
+    for (var i = 0; i < results.length; i++) {
+      results[i] = JSON.parse(results[i].replace(/'/g, '"'));
+    }
+
+    res.json(results);
   });
 });
 
