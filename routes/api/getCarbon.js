@@ -18,8 +18,6 @@ router.post("/", (req, res) => {
     if (err) throw err;
     // results is an array consisting of messages collected during execution
 
-    console.log(results.length);
-
     for (var i = 0; i < results.length; i++) {
       results[i] = JSON.parse(results[i].replace(/'/g, '"'));
     }

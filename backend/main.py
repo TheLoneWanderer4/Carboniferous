@@ -4,16 +4,16 @@ from trip_planner import find_carbon_paths
 from api_management import APIKeys
 from map_link import map_links
 
-def main(*args):
+def main(args):
     key_vault = APIKeys()
-    input_data = args[1].json()
+    input_data = json.loads(args)
     start_city,end_city,car_mpg, = \
         input_data["start"],input_data["end"],int(input_data["modes"]["car"]["mpg"])
     max_cost,max_time,depart_date = \
         int(input_data["maxPrice"]),int(input_data["maxTime"]),input_data["Date"]
     # find_carbon_paths will return a list of path objects to return as a json
     # files to the front end.
-    return_list = {}
+    return_list = []
     final_list = find_carbon_paths(start_city,end_city,car_mpg,max_cost,\
         max_time,depart_date, key_vault)
     # Serializing data to send back across
@@ -31,8 +31,21 @@ def main(*args):
     return json.dumps(return_list)
 
 
-
-main(sys.argv)
+input_json = """{
+"start": "Tucson",
+"end": "Seattle",
+"Date": "2020-01-19",
+"partySize": "22",
+"maxPrice": "500",
+"maxTime": "12",
+"modes":{
+"car": {"allowed": true, "mpg": "30"},
+"bus": {"allowed": true},
+"plane": {"allowed": true},
+"train": {"allowed": true}
+}
+}"""
+main(input_json)
 """
 INPUT JSON
 start: "",
