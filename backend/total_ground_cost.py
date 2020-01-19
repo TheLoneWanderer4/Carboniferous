@@ -44,6 +44,11 @@ def total_ground_cost(city_a, city_b, mpg, key_vault):
     global API_KEY
     API_KEY = key_vault.google_key()
 
+    if len(city_a) == 3:
+        city_a += 'airport'
+    if len(city_b) == 3:
+        city_b += 'airport'
+
     list_of_costs = []
     # Car Costs
     miles_by_car, hours_by_car = get_distance_and_time_by_car(city_a, city_b, key_vault)

@@ -89,7 +89,7 @@ def find_flights(curr_trips, destination, max_cost, max_time, depart_time, user_
     end_cities = nearby_airports(destination, key_vault)
     updated_trips = []
     for trip in curr_trips:
-        if trip.money_cost >= max_cost or trip.time_cost >= max_time:
+        if trip.money_cost >= max_cost or trip.time_cost >= max_time or trip.carbon_cost < 0:
             continue
         prev_code = trip.prev_airport_code
         if trip.get_last_city() != destination:
@@ -115,8 +115,8 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             continue
         ground_paths = total_ground_cost(prev_city, destination, car_mpg, key_vault)
         # By car
-        if user_prefs[0]:
-            car_costs = ground_paths[0   ]
+        if user_prefs[0] and ground_paths[0][0] > 0:
+            car_costs = ground_paths[0]
             car_trip = deepcopy(trip)
             car_trip_step = TripStep(destination, TripStep.CAR, car_costs[0], car_costs[1], car_costs[2])
             car_trip.cities.append(car_trip_step)
@@ -125,8 +125,9 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             car_trip.time_cost += car_costs[2]
             if car_trip.money_cost <= max_cost and car_trip.time_cost <= max_time:
                 finished_trips.append(car_trip)
+
         # By bus
-        if user_prefs[1]:
+        if user_prefs[1] and ground_paths[1][0] > 0:
             bus_costs = ground_paths[1]
             bus_trip = deepcopy(trip)
             bus_trip_step = TripStep(destination, TripStep.BUS, bus_costs[0], bus_costs[1], bus_costs[2])
@@ -138,7 +139,7 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
                 finished_trips.append(bus_trip)
 
         # By train
-        if user_prefs[2]:
+        if user_prefs[2]  and ground_paths[2][0] > 0:
             train_costs = ground_paths[2]
             train_trip = deepcopy(trip)
             train_trip_step = TripStep(destination, TripStep.TRAIN, train_costs[0], train_costs[1], train_costs[2])
@@ -148,8 +149,7 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             train_trip.time_cost += train_costs[2]
             if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time:
                 finished_trips.append(train_trip)
-
-        return finished_trips
+    return finished_trips
 
 from api_management import APIKeys
-find_carbon_paths("Tucson", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys())
+print(find_carbon_paths("Tucson", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys()))
