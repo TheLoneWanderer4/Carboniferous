@@ -1,5 +1,5 @@
 {
-  "start": "Denver",
+ "start": "Denver",
   "end": "Seattle",
   "Date": "2020-01-29",
   "partySize": "1",
@@ -8,7 +8,7 @@
   "modes": {
     "car": {
       "allowed": true,
-      "mpg": "21"
+      "mpg": "12"
     },
     "bus": {
       "allowed": true
