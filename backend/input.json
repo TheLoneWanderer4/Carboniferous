@@ -1,23 +1,23 @@
 {
-  "start": "los angeles",
-  "end": "dc",
-  "Date": "2020-01-26",
+  "start": "TUS",
+  "end": "DEN",
+  "Date": "2020-01-21",
   "partySize": "2",
-  "maxPrice": "1000",
-  "maxTime": "32",
+  "maxPrice": "1600",
+  "maxTime": "7",
   "modes": {
     "car": {
-      "allowed": true,
-      "mpg": "32"
+      "allowed": false,
+      "mpg": "100"
     },
     "bus": {
-      "allowed": true
+      "allowed": false
     },
     "plane": {
-      "allowed": true
+      "allowed": false
     },
     "train": {
-      "allowed": true
+      "allowed": false
     }
   }
 }
