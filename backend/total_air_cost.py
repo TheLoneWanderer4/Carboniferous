@@ -15,7 +15,6 @@ def total_air_cost(src, dest, date):
                             params={"date": date, "origin": src, "destination": dest})).json()
 
     if len(flights) == 0:
-        print(src + " to " + dest)
         return [-1, -1, -1]
 
     footprint = flights[0].get("distance") * KG_C_PER_MILE_BUS

@@ -18,13 +18,8 @@ key_vault: The vault that stores all of the API keys for the program
 """
 def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_time, user_prefs, key_vault):
     trips = start_ground_trips(source, destination, car_mpg, user_prefs, key_vault)
-    print(trips)
-    print("_________________________________")
     updated_trips = find_flights(trips, destination, max_cost, max_time, depart_time, user_prefs, key_vault)
-    print(updated_trips)
-    print("_________________________________")
     finished_trips = finish_trips(updated_trips, destination, max_cost, max_time, car_mpg, user_prefs, key_vault)
-    print(finished_trips)
     top_five_trips = sort_by_carbon(finished_trips)
     return top_five_trips
 
@@ -109,8 +104,6 @@ def find_flights(curr_trips, destination, max_cost, max_time, depart_time, user_
                     curr_trip.time_cost += flight_cost[2]
                     curr_trip.cities.append(flight_step)
                     updated_trips.append(curr_trip)
-                else:
-                    print(flight_cost)
     return updated_trips
 
 def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_prefs, key_vault):
@@ -159,4 +152,4 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
         return finished_trips
 
 from api_management import APIKeys
-find_carbon_paths("Phoenix", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys())
+find_carbon_paths("Tucson", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys())
