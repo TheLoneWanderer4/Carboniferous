@@ -1,4 +1,4 @@
-# [Carboniferous](carboniferous.tech)
+# [Carboniferous](http://carboniferous.tech)
 
 Travelling can produce a lot of carbon emissions, whether you're travelling by car, plane, train, bus, or airplane. Reducing our carbon footprint, even if by a little, is the first step to preserving our environment, and that is exactly what *Carboniferous* aims to do.  *Carboniferous* is a React app that calculates the most carbon efficient ways to travel from city to city using a mixture of different ways to travel and gives you the top choices based on your preference for price, travel time and modes of transportation. The project was created as a part of the 2020 HackAZ hackathon.
 
