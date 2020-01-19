@@ -21,5 +21,10 @@ Below are a few sites that can help you offset the amount of carbon you produce:
 * [American Airlines Flight-Engine API](https://github.com/AmericanAirlines/Flight-Engine)
 * [Lufthansa Nearest Airports API](https://developer.lufthansa.com/docs/read/api_details/reference_data/Nearest_Airport)
 * Carbon calculations derived from those used in the [Trip to Carbon API](https://www.notion.so/Trip-to-Carbon-API-REFERENCE-a68cfb4e0dcc41f9826cba1f3e4af5ac#d0a6a0279ce049b2939eeea120b26234). 
-### Image Attributions
+### Image and Video Attributions
 * [Logo image: free-use on Vecteezy](https://www.vecteezy.com/vector-art/146657-free-pine-cones-vector)
+* [Field of grain clip](https://www.youtube.com/watch?v=qQJtbc6Xt4A)
+* [Smoke stacks clip](https://www.youtube.com/watch?v=gfk9kLep-Ds)
+* [Glacier collapsing clip](https://www.youtube.com/watch?v=nWH7tzVtB2k&start=12s)
+* [Earth from space clip](https://www.youtube.com/watch?v=GVtuKk4N21Q)
+* [People walking down the street clip](https://www.youtube.com/watch?v=ng8Wivt52K0)
