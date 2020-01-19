@@ -9,7 +9,8 @@ def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_t
     trips = start_ground_trips(source, destination, car_mpg, key_vault)
     updated_trips = find_flights(trips, destination, max_cost, max_time, depart_time, key_vault)
     finished_trips = finish_trips(updated_trips, destination, max_cost, max_time, car_mpg, key_vault)
-    return sort_by_carbon(finished_trips)
+    top_five_trips = sort_by_carbon(finished_trips)
+    return top_five_trips
 
 """
 
@@ -125,10 +126,4 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, key_vault
         train_trip.time_cost += train_costs[2]
         if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time:
             finished_trips.append(train_trip)
-    print(finished_trips)
-
     return finished_trips
-    
-
-from api_management import APIKeys
-find_carbon_paths("Tucson", "Seattle", 35, 10000, 100, "2020-01-15", key_vault= APIKeys())

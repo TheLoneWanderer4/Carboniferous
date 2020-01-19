@@ -35,7 +35,3 @@ def get_min_cost(flights):
         if flight.get(COST) < min_cost:
             min_cost = flight.get(COST)
     return min_cost
-
-
-# for testing
-print(total_air_cost("ORD", "DFW", "2020-01-02"))
