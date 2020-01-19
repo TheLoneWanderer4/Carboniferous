@@ -6,8 +6,8 @@ const Example = props => {
   return (
     <Container className="landing d-flex align-items-center justify-content-center">
       <Jumbotron className="shadow-lg w-100">
-        <div className="d-flex justify-content-around align-items-center">
-          <h1 className="display-3">Carboniferous</h1>
+        <div className="d-flex flex-column flex-lg-row justify-content-around align-items-center">
+          <h1 className="display-4">Carboniferous</h1>
           <img src={logo} alt="acorn" />
         </div>
         <p className="lead">
