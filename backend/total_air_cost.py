@@ -21,7 +21,7 @@ def total_air_cost(src, dest, date):
                               params={"activity": flights[0].get("distance"), "activityType": "miles",
                                       "mode": FLIGHT_TYPE, "country": COUNTRY}).json().get("carbonFootprint"))
 
-    info = [footprint, get_time_from_flight(flights[0]), get_min_cost(flights)]
+    info = [footprint, get_min_cost(flights), get_time_from_flight(flights[0])]
     return info
 
 
@@ -35,7 +35,3 @@ def get_min_cost(flights):
         if flight.get(COST) < min_cost:
             min_cost = flight.get(COST)
     return min_cost
-
-
-# for testing
-print(total_air_cost("ORD", "DFW", "2020-01-02"))
