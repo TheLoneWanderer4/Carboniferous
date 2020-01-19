@@ -89,7 +89,7 @@ def find_flights(curr_trips, destination, max_cost, max_time, depart_time, user_
     end_cities = nearby_airports(destination, key_vault)
     updated_trips = []
     for trip in curr_trips:
-        if trip.money_cost >= max_cost or trip.time_cost >= max_time:
+        if trip.money_cost >= max_cost or trip.time_cost >= max_time or trip.carbon_cost < 0:
             continue
         prev_code = trip.prev_airport_code
         if trip.get_last_city() != destination:
@@ -123,7 +123,7 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             car_trip.carbon_cost += float(car_costs[0])
             car_trip.money_cost += car_costs[1]
             car_trip.time_cost += car_costs[2]
-            if car_trip.money_cost <= max_cost and car_trip.time_cost <= max_time:
+            if car_trip.money_cost <= max_cost and car_trip.time_cost <= max_time and car_trip.carbon_cost > 0:
                 finished_trips.append(car_trip)
         # By bus
         if user_prefs[1]:
@@ -134,7 +134,7 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             bus_trip.carbon_cost += float(bus_costs[0])
             bus_trip.money_cost += bus_costs[1]
             bus_trip.time_cost += bus_costs[2]
-            if bus_trip.money_cost <= max_cost and bus_trip.time_cost <= max_time:
+            if bus_trip.money_cost <= max_cost and bus_trip.time_cost <= max_time and bus_trip.carbon_cost > 0:
                 finished_trips.append(bus_trip)
 
         # By train
@@ -146,7 +146,15 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             train_trip.carbon_cost += float(train_costs[0])
             train_trip.money_cost += train_costs[1]
             train_trip.time_cost += train_costs[2]
-            if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time:
+            if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time and train_trip.carbon_cost > 0:
                 finished_trips.append(train_trip)
+    for tripData in finished_trips:
+        for step in tripData.cities:
+            print(step.carbon_cost)
+        print("\n\n")
 
+    print(finished_trips)
     return finished_trips
+
+from api_management import APIKeys
+find_carbon_paths("Phoenix", "Seattle", 25, 1000, 8, "2020-01-15", [True, True, True, True], APIKeys())
