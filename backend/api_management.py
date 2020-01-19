@@ -1,5 +1,5 @@
 import json
-default_key_loc = "/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/api_keys.json"
+default_key_loc = "api_keys.json"
 
 class APIKeys:
     google_key_val = ""

@@ -207,5 +207,5 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
 
     return finished_trips
 
-from api_management import APIKeys
-print(find_carbon_paths("Tucson", "Seattle", 30, 1500, 12, "2020-01-25", [False, False, False, True], APIKeys()))
+#from api_management import APIKeys
+#print(find_carbon_paths("Tucson", "Seattle", 30, 1500, 12, "2020-01-25", [True, True, True, True], APIKeys()))
