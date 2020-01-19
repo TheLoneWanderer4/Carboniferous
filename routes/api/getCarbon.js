@@ -15,6 +15,7 @@ router.post("/", (req, res) => {
   };
 
   fs.writeFile(
+    //CHANGE MACHINE TO MACHINE
     "/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/input.json",
     JSON.stringify(req.body, null, 2),
     err => {

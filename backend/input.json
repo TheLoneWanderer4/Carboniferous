@@ -1,14 +1,14 @@
 {
-  "start": "los angeles",
-  "end": "dc",
-  "Date": "2020-01-26",
+  "start": "TUS",
+  "end": "LAX",
+  "Date": "2020-01-21",
   "partySize": "2",
-  "maxPrice": "1000",
-  "maxTime": "32",
+  "maxPrice": "1600",
+  "maxTime": "12",
   "modes": {
     "car": {
       "allowed": true,
-      "mpg": "32"
+      "mpg": "34"
     },
     "bus": {
       "allowed": true
