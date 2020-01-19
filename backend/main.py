@@ -1,4 +1,4 @@
-pyimport json
+import json
 import sys
 from trip_planner import find_carbon_paths
 from api_management import APIKeys
