@@ -2,13 +2,13 @@ import requests
 
 # api locations
 FLIGHT_DATA_API = "http://localhost:3030/flights"
-CARBON_FOOTPRINT_API = "https://api.triptocarbon.xyz/v1/footprint"
 
 # strings that are likely to be adjusted as parameters
 FLIGHT_TYPE = "economyFlight"
 COUNTRY = "usa"
 COST = "cost"
 
+KG_C_PER_MILE_BUS = 0.18
 
 def total_air_cost(src, dest, date):
     flights = (requests.get(FLIGHT_DATA_API,
@@ -17,9 +17,7 @@ def total_air_cost(src, dest, date):
     if len(flights) == 0:
         return [-1, -1, -1]
 
-    footprint = float(requests.get(CARBON_FOOTPRINT_API,
-                              params={"activity": flights[0].get("distance"), "activityType": "miles",
-                                      "mode": FLIGHT_TYPE, "country": COUNTRY}).json().get("carbonFootprint"))
+    footprint = flights[0].get("distance") * KG_C_PER_MILE_BUS
 
     info = [footprint, get_min_cost(flights), get_time_from_flight(flights[0])]
     return info

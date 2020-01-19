@@ -150,3 +150,4 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
                 finished_trips.append(train_trip)
 
     return finished_trips
+
