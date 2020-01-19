@@ -12,8 +12,4 @@ def map_links(start,destination,mode):
         raise ValueError("none is not a proper mode of transport")
     link = "https://www.google.com/maps/dir/?api=1" + \
         "&origin=" + start + "&destination=" + destination + "&travelmode=" + mode_to_gmode[mode]
-    print(link)
-
-
-map_links(sys.argv)
-
+    return link

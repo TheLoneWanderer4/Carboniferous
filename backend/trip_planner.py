@@ -7,17 +7,33 @@ from copy import deepcopy
 
 def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_time, key_vault):
     trips = start_ground_trips(source, destination, car_mpg, key_vault)
-    print(trips[0], " last city: ", trips[0].get_last_city())
-    find_flights(trips, destination, max_cost, max_time, depart_time, key_vault)
+    updated_trips = find_flights(trips, destination, max_cost, max_time, depart_time, key_vault)
+    finished_trips = finish_trips(updated_trips, destination, max_cost, max_time, car_mpg, key_vault)
+    top_five_trips = sort_by_carbon(finished_trips)
+    return top_five_trips
 
 """
 
 """
+
+def sort_by_carbon(finished_trips):
+    carbon_dictionary = {}
+    for trip in finished_trips:
+        carbon_dictionary[trip.carbon_cost] = trip
+
+    top_five_carbons = list(carbon_dictionary.keys())
+    top_five_carbons.sort()
+    top_five_trips = []
+    for val in top_five_carbons[:5]:
+        top_five_trips.append(carbon_dictionary[val])
+    return top_five_trips
+
+
 def start_ground_trips(source, destination, car_mpg, key_vault):
     src_airports = nearby_airports(source, key_vault)
     trips = []
     for airport, code in src_airports:
-        ground_paths = total_ground_cost(source, airport, car_mpg)
+        ground_paths = total_ground_cost(source, airport, car_mpg, key_vault)
 
         car_trip = Trip(source)
         car_costs = ground_paths[0]
@@ -53,7 +69,6 @@ def start_ground_trips(source, destination, car_mpg, key_vault):
     
 def find_flights(curr_trips, destination, max_cost, max_time, depart_time, key_vault):
     end_cities = nearby_airports(destination, key_vault)
-    print(curr_trips)
     updated_trips = []
     for trip in curr_trips:
         if trip.money_cost >= max_cost or trip.time_cost >= max_time:
@@ -73,9 +88,42 @@ def find_flights(curr_trips, destination, max_cost, max_time, depart_time, key_v
                     updated_trips.append(curr_trip)
     return updated_trips
 
-def finish_trips(curr_trips, destination, max_cost, max_time):
+def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, key_vault):
+    finished_trips = []
     for trip in curr_trips:
-        pass
-
-from api_management import APIKeys
-find_carbon_paths("Tucson", "Seattle", 35, 10000, 100, "2020-01-15", key_vault= APIKeys())
+        prev_city = trip.get_last_city()
+        if prev_city == destination:
+            finished_trips.append(trip)
+            continue
+        ground_paths = total_ground_cost(prev_city, destination, car_mpg, key_vault)
+        # By car
+        car_costs = ground_paths[0]
+        car_trip = deepcopy(trip)
+        car_trip_step = TripStep(destination, TripStep.CAR, car_costs[0], car_costs[1], car_costs[2])
+        car_trip.cities.append(car_trip_step)
+        car_trip.carbon_cost += float(car_costs[0])
+        car_trip.money_cost += car_costs[1]
+        car_trip.time_cost += car_costs[2]
+        if car_trip.money_cost <= max_cost and car_trip.time_cost <= max_time:
+            finished_trips.append(car_trip)
+        # By bus
+        bus_costs = ground_paths[1]
+        bus_trip = deepcopy(trip)
+        bus_trip_step = TripStep(destination, TripStep.BUS, bus_costs[0], bus_costs[1], bus_costs[2])
+        bus_trip.cities.append(bus_trip_step)
+        bus_trip.carbon_cost += float(bus_costs[0])
+        bus_trip.money_cost += bus_costs[1]
+        bus_trip.time_cost += bus_costs[2]
+        if bus_trip.money_cost <= max_cost and bus_trip.time_cost <= max_time:
+            finished_trips.append(bus_trip)
+        # By train
+        train_costs = ground_paths[2]
+        train_trip = deepcopy(trip)
+        train_trip_step = TripStep(destination, TripStep.TRAIN, train_costs[0], train_costs[1], train_costs[2])
+        train_trip.cities.append(train_trip_step)
+        train_trip.carbon_cost += float(train_costs[0])
+        train_trip.money_cost += train_costs[1]
+        train_trip.time_cost += train_costs[2]
+        if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time:
+            finished_trips.append(train_trip)
+    return finished_trips

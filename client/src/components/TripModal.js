@@ -55,7 +55,7 @@ const ModalExample = props => {
             <b className="text-primary">{props.data.total_time}</b> Hours
           </p>
 
-          <Table>
+          <Table hover responsive bordered>
             <thead>
               <tr>
                 <th>Stop</th>
