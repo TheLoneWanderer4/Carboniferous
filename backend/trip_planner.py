@@ -151,3 +151,6 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
                 finished_trips.append(train_trip)
 
     return finished_trips
+
+from api_management import APIKeys
+print(find_carbon_paths("Tucson", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys()))
