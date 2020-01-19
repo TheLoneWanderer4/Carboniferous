@@ -8,7 +8,7 @@ FLIGHT_TYPE = "economyFlight"
 COUNTRY = "usa"
 COST = "cost"
 
-KG_C_PER_MILE_BUS = 0.18
+KG_C_PER_MILE_BUS = 0.14
 
 def total_air_cost(src, dest, date):
     flights = (requests.get(FLIGHT_DATA_API,

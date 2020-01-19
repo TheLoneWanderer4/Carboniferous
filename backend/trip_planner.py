@@ -149,7 +149,8 @@ def finish_trips(curr_trips, destination, max_cost, max_time, car_mpg, user_pref
             train_trip.time_cost += train_costs[2]
             if train_trip.money_cost <= max_cost and train_trip.time_cost <= max_time:
                 finished_trips.append(train_trip)
+
     return finished_trips
 
-from api_management import APIKeys
-print(find_carbon_paths("Tucson", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys()))
+#from api_management import APIKeys
+#print(find_carbon_paths("Tucson", "Seattle", 30, 1500, 8, "2020-01-25", [True, True, True, True], APIKeys()))
