@@ -13,7 +13,6 @@ Travelling can produce a lot of carbon emissions, whether you're travelling by c
 Below are a few sites that can help you offset the amount of carbon you produce:
 - [A list of everyday things to do](https://blogs.ei.columbia.edu/2018/12/27/35-ways-reduce-carbon-footprint/) 
 - [A list of sustain-ably produced products](https://www.americanexpress.com/en-us/business/trends-and-insights/articles/going-green-2012-sustainable-products-to-reduce-your-carbon-footprint/) 
-- A company you can donate to, to fund reversing climate change 
-
+- [A list of carbon offset programs to mitigate your emitted carbon](https://www.goldstandard.org/take-action/offset-your-emissions)
 
 
