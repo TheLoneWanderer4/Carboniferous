@@ -12,7 +12,14 @@ Travelling can produce a lot of carbon emissions, whether you're travelling by c
 ## Offsetting your Carbon Footprint
 Below are a few sites that can help you offset the amount of carbon you produce:
 - [A list of everyday things to do](https://blogs.ei.columbia.edu/2018/12/27/35-ways-reduce-carbon-footprint/) 
-- [A list of sustain-ably produced products](https://www.americanexpress.com/en-us/business/trends-and-insights/articles/going-green-2012-sustainable-products-to-reduce-your-carbon-footprint/) 
+- [A list of sustainably produced products](https://www.americanexpress.com/en-us/business/trends-and-insights/articles/going-green-2012-sustainable-products-to-reduce-your-carbon-footprint/) 
 - [A list of carbon offset programs to mitigate your emitted carbon](https://www.goldstandard.org/take-action/offset-your-emissions)
 
-
+## Attributions
+### API Use
+* [Google Maps API suite](https://developers.google.com/maps/documentation)
+* [American Airlines Flight-Engine API](https://github.com/AmericanAirlines/Flight-Engine)
+* [Lufthansa Nearest Airports API](https://developer.lufthansa.com/docs/read/api_details/reference_data/Nearest_Airport)
+* Carbon calculations derived from those used in the [Trip to Carbon API](https://www.notion.so/Trip-to-Carbon-API-REFERENCE-a68cfb4e0dcc41f9826cba1f3e4af5ac#d0a6a0279ce049b2939eeea120b26234). 
+### Image Attributions
+* [Logo image: free-use on Vecteezy](https://www.vecteezy.com/vector-art/146657-free-pine-cones-vector)
