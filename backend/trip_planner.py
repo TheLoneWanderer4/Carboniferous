@@ -42,7 +42,7 @@ def direct_trips(source, destination, car_mpg, max_cost, max_time, depart_time, 
     return_list = []
     if user_prefs[0] or user_prefs[1] or user_prefs[2] == True:
         ground_cost = total_ground_cost(source,destination,car_mpg,key_vault)
-        if user_prefs[0]:
+        if user_prefs[0] and ground_cost[0][0] > 0:
             car_trip = Trip(source)
             car_trip_step = TripStep(destination,TripStep.CAR,ground_cost[0][0],ground_cost[0][1],ground_cost[0][2])
             car_trip.cities.append(car_trip_step)
@@ -50,7 +50,7 @@ def direct_trips(source, destination, car_mpg, max_cost, max_time, depart_time, 
             car_trip.money_cost += ground_cost[0][1]
             car_trip.time_cost += ground_cost[0][2]
             return_list.append(car_trip)
-        if user_prefs[1]:
+        if user_prefs[1] and ground_cost[1][0] > 0:
             bus_trip = Trip(source)
             bus_trip_step = TripStep(destination,TripStep.BUS,ground_cost[1][0],ground_cost[1][1],ground_cost[1][2])
             bus_trip.cities.append(bus_trip_step)
@@ -58,7 +58,7 @@ def direct_trips(source, destination, car_mpg, max_cost, max_time, depart_time, 
             bus_trip.money_cost += ground_cost[1][1]
             bus_trip.time_cost += ground_cost[1][2]
             return_list.append(bus_trip)
-        if user_prefs[2]:
+        if user_prefs[2] and ground_cost[2][0] > 0:
             train_trip = Trip(source)
             train_trip_step = TripStep(destination,TripStep.TRAIN,ground_cost[2][0],ground_cost[2][1],ground_cost[2][2])
             train_trip.cities.append(train_trip_step)
@@ -69,12 +69,13 @@ def direct_trips(source, destination, car_mpg, max_cost, max_time, depart_time, 
     if user_prefs[3]:
         plane_trip = Trip(source)
         plane_cost = total_air_cost(source_airport_code,destination_airport_code,depart_time)
-        plane_trip_step = TripStep(destination,TripStep.PLANE,plane_cost[0],plane_cost[1],plane_cost[2])
-        plane_trip.cities.append(plane_trip_step)
-        plane_trip.carbon_cost += plane_cost[0]
-        plane_trip.money_cost += plane_cost[1]
-        plane_trip.time_cost += plane_cost[2]
-        return_list.append(plane_trip)
+        if plane_cost[0] > 0:
+            plane_trip_step = TripStep(destination,TripStep.PLANE,plane_cost[0],plane_cost[1],plane_cost[2])
+            plane_trip.cities.append(plane_trip_step)
+            plane_trip.carbon_cost += plane_cost[0]
+            plane_trip.money_cost += plane_cost[1]
+            plane_trip.time_cost += plane_cost[2]
+            return_list.append(plane_trip)
     return return_list
 
 
