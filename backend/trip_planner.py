@@ -36,9 +36,6 @@ def find_carbon_paths(source, destination, car_mpg, max_cost, max_time, depart_t
 def direct_trips(source, destination, car_mpg, max_cost, max_time, depart_time, user_prefs, key_vault):
     global source_airport_code
     global destination_airport_code
-    print(source_airport_code)
-    print(destination_airport_code)
-    print(depart_time)
     return_list = []
     if user_prefs[0] or user_prefs[1] or user_prefs[2] == True:
         ground_cost = total_ground_cost(source,destination,car_mpg,key_vault)
@@ -135,7 +132,7 @@ def start_ground_trips(source, destination, car_mpg, user_prefs, key_vault):
                 trips.append(train_trip)
 
     return trips
-    
+
 def find_flights(curr_trips, destination, max_cost, max_time, depart_time, user_prefs, key_vault):
     global destination_airport_code
     if not user_prefs[3]:
