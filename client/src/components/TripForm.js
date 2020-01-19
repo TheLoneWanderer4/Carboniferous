@@ -25,7 +25,7 @@ class TripForm extends Component {
     maxPrice: "",
     maxTime: "",
     modes: {
-      car: { allowed: true, mpg: 0 },
+      car: { allowed: true, mpg: 1 },
       bus: { allowed: true },
       plane: { allowed: true },
       train: { allowed: true }
@@ -67,7 +67,7 @@ class TripForm extends Component {
           name="mpg"
           id="mpg"
           type="number"
-          min="0"
+          min="1"
           placeholder="Enter your car's MPG "
           onChange={this.mpgChange}
         />
