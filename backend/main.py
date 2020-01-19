@@ -43,7 +43,7 @@ def main(args):
     return json.dumps(return_list)
 
 # MUST CHANGE ABSOLUTE PATH BASED ON LOCATION
-input_json = open("/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/input.json")
+input_json = open("/var/www/Carboniferous/backend/input.json")
 
 backup_data = {
     "steps" : [{"current_city": "ERROR",

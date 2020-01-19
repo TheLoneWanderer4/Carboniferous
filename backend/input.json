@@ -1,23 +1,23 @@
 {
-  "start": "TUS",
-  "end": "DEN",
-  "Date": "2020-01-21",
-  "partySize": "2",
-  "maxPrice": "1600",
-  "maxTime": "7",
+  "start": "Denver",
+  "end": "Seattle",
+  "Date": "2020-01-29",
+  "partySize": "1",
+  "maxPrice": "9000",
+  "maxTime": "9",
   "modes": {
     "car": {
-      "allowed": false,
-      "mpg": "100"
+      "allowed": true,
+      "mpg": "21"
     },
     "bus": {
-      "allowed": false
+      "allowed": true
     },
     "plane": {
-      "allowed": false
+      "allowed": true
     },
     "train": {
-      "allowed": false
+      "allowed": true
     }
   }
 }

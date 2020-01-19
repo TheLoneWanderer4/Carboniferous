@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
   };
 
   fs.writeFile(
-    "/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/input.json",
+    "/var/www/Carboniferous/backend/input.json",
     JSON.stringify(req.body, null, 2),
     err => {
       if (err) throw error;
