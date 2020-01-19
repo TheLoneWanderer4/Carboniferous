@@ -1,23 +1,23 @@
 {
-  "start": "TUS",
-  "end": "DEN",
+  "start": "Phoenix ",
+  "end": "Dallas",
   "Date": "2020-01-21",
   "partySize": "2",
   "maxPrice": "1600",
   "maxTime": "7",
   "modes": {
     "car": {
-      "allowed": false,
-      "mpg": "100"
+      "allowed": true,
+      "mpg": "21"
     },
     "bus": {
-      "allowed": false
+      "allowed": true
     },
     "plane": {
-      "allowed": false
+      "allowed": true
     },
     "train": {
-      "allowed": false
+      "allowed": true
     }
   }
 }
