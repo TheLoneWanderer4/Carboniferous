@@ -6,15 +6,10 @@ const initialState = {
   loading: false
 };
 
-function sleep(delay) {
-  var start = new Date().getTime();
-  while (new Date().getTime() < start + delay);
-}
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_CARBON:
-      sleep(3000);
+      console.log(action.payload);
       return {
         ...state,
         paths: action.payload,
