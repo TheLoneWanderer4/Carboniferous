@@ -29,7 +29,12 @@ def main(args):
         if(len(final_list) <= i):
             break
         trip_dict = final_list[i].make_dict()
-        trip_dict["steps"][0]["link"] = ""
+        if len(trip_dict) == 0: 
+            trip_dict["steps"][0]["link"] = ""
+        if len(trip_dict) == 1: 
+            trip_dict["steps"][0]["link"] = map_links(start_city,end_city,trip_dict["steps"][0]["transport"])
+        else:
+            trip_dict["steps"][0]["link"] = map_links(start_city,trip_dict["steps"][1]["current_city"],trip_dict["steps"][0]["transport"])
         for k in range(1,len(trip_dict["steps"])):
             trip_dict["steps"][k]["link"] = map_links(trip_dict["steps"][k-1]["current_city"],trip_dict["steps"][k]["current_city"],trip_dict["steps"][k]["transport"])
         return_list.append(trip_dict)
