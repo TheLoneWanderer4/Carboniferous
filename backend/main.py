@@ -18,14 +18,12 @@ def main(args):
         max_time,depart_date, key_vault)
     # Serializing data to send back across
     for i in range(5):
-        print(final_list[i].make_dict())
         if(len(final_list) <= i):
             break
         trip_dict = final_list[i].make_dict()
         trip_dict["steps"][0]["link"] = ""
         for k in range(1,len(trip_dict["steps"])):
             trip_dict["steps"][k]["link"] = map_links(trip_dict["steps"][k-1]["current_city"],trip_dict["steps"][k]["current_city"],trip_dict["steps"][k]["transport"])
-        print(trip_dict)
         return_list.append(trip_dict)
         # TODO: Actually check if this works!!!
     for x in return_list:
