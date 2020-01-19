@@ -7,6 +7,7 @@ function TripInput(props) {
       <FormGroup>
         <Label for={props.name}>{props.label}</Label>
         <Input
+          required
           type={props.type}
           name={props.name}
           id={props.name}

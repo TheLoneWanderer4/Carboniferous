@@ -28,9 +28,9 @@ const ModalExample = props => {
             </a>
           </th>
           <th>{step.transport}</th>
-          <th>{step.carbon_cost}</th>
-          <th>{step.dollar_cost}</th>
-          <th>{step.time_cost}</th>
+          <th>{parseFloat(step.carbon_cost).toFixed(2)} kgOfCarbon</th>
+          <th>${parseFloat(step.dollar_cost).toFixed(2)}</th>
+          <th>{parseFloat(step.time_cost).toFixed(2)} Hours</th>
         </tr>
       ));
     }
@@ -43,16 +43,24 @@ const ModalExample = props => {
         <ModalBody>
           <p>
             The total carbon footprint of this trip is{" "}
-            <b className="text-primary">{props.data.total_carbon}</b> kgOfCarbon
+            <b className="text-primary">
+              {parseFloat(props.data.total_carbon).toFixed(2)}
+            </b>{" "}
+            kgOfCarbon
           </p>
           <p>
             The total cost of this trip is{" "}
-            <b className="text-primary">{props.data.total_dollars}</b> United
-            States Dollars
+            <b className="text-primary">
+              {parseFloat(props.data.total_dollars).toFixed(2)}
+            </b>{" "}
+            United States Dollars
           </p>
           <p>
             The total time of this trip is{" "}
-            <b className="text-primary">{props.data.total_time}</b> Hours
+            <b className="text-primary">
+              {parseFloat(props.data.total_time).toFixed(2)}
+            </b>{" "}
+            Hours
           </p>
 
           <Table hover responsive bordered>
