@@ -6,7 +6,7 @@ from map_link import map_links
 
 def main(args):
     key_vault = APIKeys()
-    input_data = json.loads(args)
+    input_data = json.load(args)
     start_city,end_city,car_mpg, = \
         input_data["start"],input_data["end"],int(input_data["modes"]["car"]["mpg"])
     max_cost,max_time,depart_date = \
@@ -30,8 +30,11 @@ def main(args):
         print(json.dumps(x))
     return json.dumps(return_list)
 
+# MUST CHANGE ABSOLUTE PATH BASED ON LOCATION
+input_json = open("/home/nafal/Documents/Dev/hackaz/Carboniferous/backend/input.json")
 
-input_json = """{
+
+hold = """{
 "start": "Tucson",
 "end": "Seattle",
 "Date": "2020-01-19",

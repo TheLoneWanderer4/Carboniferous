@@ -1,10 +1,10 @@
 {
-  "start": "Dallas",
+  "start": "El Paso",
   "end": "Tucson",
-  "Date": "2020-1-1",
+  "Date": "2020-01-23",
   "partySize": "2",
-  "maxPrice": "2",
-  "maxTime": "2",
+  "maxPrice": "500",
+  "maxTime": "12",
   "modes": {
     "car": { "allowed": true, "mpg": "30" },
     "bus": { "allowed": true },
