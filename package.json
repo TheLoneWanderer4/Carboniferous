@@ -18,7 +18,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "concurrently": "^3.5.1",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "python-shell": "^1.0.8"
   }
 }
